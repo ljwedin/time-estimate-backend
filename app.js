@@ -3,6 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const MongoClient = require('mongodb').MongoClient;
+require('dotenv').config();
+
+MongoClient.connect(process.env.MONGO_URI, {
+  useUnifiedTopology: true
+})
+.then(client => {
+  console.log('Connected to database');
+  const db = client.db('fed20d_dynweb');
+  app.locals.db = db;
+});
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

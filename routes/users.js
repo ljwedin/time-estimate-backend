@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  req.app.locals.db.collection('time-estimates').find().toArray()
+  .then(results => {
+    console.log(results);
+    res.send(results);
+  })
 });
 
 module.exports = router;
