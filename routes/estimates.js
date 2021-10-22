@@ -10,4 +10,15 @@ router.get('/', function(req, res, next) {
   })
 });
 
+router.post('/', function(req, res, next) {
+  req.app.locals.db.collection('time-estimates').insertOne({
+    name: req.body.name,
+    estimate: req.body.estimate,
+    issue: req.body.issue
+  })
+  .then(result => {
+      res.send(result);
+  })
+});
+
 module.exports = router;
