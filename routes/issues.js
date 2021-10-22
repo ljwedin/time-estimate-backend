@@ -12,9 +12,13 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     req.app.locals.db.collection('issues').insertOne({
-      name: req.body.name,
-      owner: req.body.estimate,
-      notes: req.body.issue
+      url: req.body.url,
+      issueId: req.body.issueId,
+      title: req.body.title,
+      body: req.body.body,
+      assignees: req.body.assignees,
+      created: req.body.created,
+      estimates: req.body.estimates
     })
     .then(result => {
         res.send(result);
